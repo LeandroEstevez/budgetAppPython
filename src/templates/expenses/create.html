@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}New Expense{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-start">
+  <div class="col-4">
+    <form method="post">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input id="name" type="text" class="form-control" name="name" value="{{ request.form['name'] }}" required>
+      </div>
+      <div class="mb-3">
+        <label for="amount" class="form-label">Amount</label>
+        <input class="form-control" type="number" min="0" step=".01" name="amount" id="amount" value="{{ request.form['amount'] }}" required>
+      </div>
+      <div class="mb-3">
+        <label for="due_date" class="form-label">Due Date</label>
+        <input class="form-control" type="date" name="due_date" id="due_date" value="{{ request.form['due_date'] }}" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

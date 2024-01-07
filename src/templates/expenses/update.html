@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Update{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-start">
+  <div class="col-4">
+    <form method="post">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input id="name" type="text" class="form-control" name="name" value="{{ request.form['name'] or expense['name'] }}" required>
+      </div>
+      <div class="mb-3">
+        <label for="amount" class="form-label">Amount</label>
+        <input class="form-control" name="amount" id="amount" value="{{ request.form['amount'] or expense['amount'] }}" required>
+      </div>
+      <div class="mb-3">
+        <label for="due_date" class="form-label">Due Date</label>
+        <input class="form-control" name="due_date" id="due_date" value="{{ request.form['due_date'] or expense['due_date'] }}" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+  </div>
+</div>
+<hr>
+<form action="{{ url_for('expenses.delete_expense', name=expense['id']) }}" method="post">
+  <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
+</form>
+{% endblock %}
