@@ -4,8 +4,8 @@ from src.models.expense import Expense
 
 
 class User(mongoengine.Document):
-    username = mongoengine.StringField(required=True, min_length=1, primary_key=True)
-    password = mongoengine.StringField(required=True, min_length=8)
+    username = mongoengine.StringField(required=True, min_length=1, unique=True)
+    password = mongoengine.StringField(required=True)
 
     expenses = mongoengine.EmbeddedDocumentListField(Expense)
 

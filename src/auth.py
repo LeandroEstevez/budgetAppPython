@@ -28,9 +28,7 @@ def register_user():
             hashed_password = generate_password_hash(password)
             created_user, error = create_user(username, hashed_password)
 
-            if error is not None:
-                flash(error)
-            else:
+            if error is None:
                 session.clear()
                 session['user_id'] = str(created_user['id'])
                 return redirect(url_for("expenses.display_expenses"))

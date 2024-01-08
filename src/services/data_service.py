@@ -4,7 +4,7 @@ from typing import List, Any
 
 from bson import ObjectId
 from flask import g
-from mongoengine import OperationError, NotUniqueError, ValidationError
+from mongoengine import OperationError, NotUniqueError, ValidationError, DoesNotExist
 
 from src.models.expense import Expense
 from src.models.user import User
@@ -97,13 +97,14 @@ def create_user(username: str, password: str) -> (User, str):
 
 
 def remove_user(user_id: str) -> str | None:
-    user = User.objects(id=user_id).first()
+    obj_id = ObjectId(user_id)
 
-    if user:
+    try:
+        user = User.objects.get(id=obj_id)
         user.delete()
         return None
-    else:
-        print("Database Operation Error: User not found")
+    except DoesNotExist as e:
+        print(f"Database Operation Error: {e}")
         return "Internal error. Please try again."
 
 
@@ -112,6 +113,12 @@ def find_user_by_username(username: str) -> User:
     return user
 
 
-def find_user_by_id(user_id: ObjectId) -> User:
-    user = User.objects(id=user_id).first()
-    return user
+def find_user_by_id(user_id: ObjectId) -> User | None:
+    obj_id = ObjectId(user_id)
+
+    try:
+        user = User.objects.get(id=obj_id)
+        return user
+    except DoesNotExist as e:
+        print(f"Database Operation Error: {e}")
+        return None
