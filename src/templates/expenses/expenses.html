@@ -18,9 +18,9 @@
             <!-- Your rows inside the table HERE: -->
             {% for expense in expenses %}
                 <tr>
-                    <td>{{ expense.name }}</td>
-                    <td>{{ expense.amount }}</td>
-                    <td>{{ expense.due_date }}</td>
+                    <td>{{ expense.name|e }}</td>
+                    <td>{{ expense.amount|e }}</td>
+                    <td>{{ expense.due_date|e }}</td>
                     <td>
                         <button type="button" class="btn btn-info">
                             <a class="link-underline link-underline-opacity-0" style="color: white" href="{{ url_for('expenses.update_expense', expense_id=expense['id']) }}">Update</a>
