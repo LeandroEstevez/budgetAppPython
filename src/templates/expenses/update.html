@@ -10,15 +10,15 @@
     <form method="post">
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>
-        <input id="name" type="text" class="form-control" name="name" value="{{ request.form['name'] or expense['name'] }}" required>
+        <input id="name" type="text" class="form-control" name="name" value="{{ request.form['name']|e or expense['name']|e }}" required>
       </div>
       <div class="mb-3">
         <label for="amount" class="form-label">Amount</label>
-        <input class="form-control" name="amount" id="amount" value="{{ request.form['amount'] or expense['amount'] }}" required>
+        <input class="form-control" name="amount" id="amount" value="{{ request.form['amount']|e or expense['amount']|e }}" required>
       </div>
       <div class="mb-3">
         <label for="due_date" class="form-label">Due Date</label>
-        <input class="form-control" name="due_date" id="due_date" value="{{ request.form['due_date'] or expense['due_date'] }}" required>
+        <input class="form-control" name="due_date" id="due_date" value="{{ request.form['due_date']|e or expense['due_date']|e }}" required>
       </div>
       <button type="submit" class="btn btn-primary">Update</button>
     </form>
